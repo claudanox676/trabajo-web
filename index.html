@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexo - Tienda de Ropa Premium | E-commerce</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --primary-dark: #1a252f;
+            --accent: #e74c3c;
+            --accent-light: #ff6b6b;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --bg: #f8f9fa;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --white: #ffffff;
+            --border: #ecf0f1;
+            --shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background-color: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* ============ HEADER & NAVIGATION ============ */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 0 1.5rem;
+        }
+
+        .search-bar input {
+            padding: 0.7rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            width: 220px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            background: #f5f5f5;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .search-bar button {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            background: var(--accent);
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .search-bar button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .account-actions span {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+        }
+
+        .account-actions span:hover {
+            color: var(--accent);
+            background: rgba(231, 76, 60, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn {
+            padding: 0.8rem 1.6rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        /* ============ SECTIONS ============ */
+        .page-section {
+            display: none;
+            padding: 3rem 5%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============ GRID & CARDS ============ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: slideInUp 0.5s ease;
+            overflow: hidden;
+        }
+
+        .card-product {
+            padding: 1.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .img-placeholder {
+            background: linear-gradient(135deg, #e8eef7 0%, #f0f4fa 100%);
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bdc3c7;
+            font-weight: 500;
+            border-radius: 8px;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .img-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            text-transform: capitalize;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ============ SIDEBAR LAYOUTS ============ */
+        .with-sidebar {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .with-sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent);
+            color: var(--primary);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav div {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-light);
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav div:hover {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--accent);
+            border-left-color: var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        /* ============ HERO SECTION ============ */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 4rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            min-height: 350px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero .btn-primary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ============ ADMIN DASHBOARD ============ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card h4 {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card h3 {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .stat-card small {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* ============ TABLES ============ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: 2px solid var(--accent);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--accent);
+        }
+
+        /* ============ FORMS ============ */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text);
+            text-transform: capitalize;
+        }
+
+        /* ============ PRICE STYLING ============ */
+        .price {
+            font-size: 1.6rem;
+            color: var(--accent);
+            font-weight: 800;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-right: 0.5rem;
+        }
+
+        .discount-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+        }
+
+        /* ============ SUCCESS MESSAGE ============ */
+        .success-message {
+            background: linear-gradient(135deg, var(--success) 0%, #229954 100%);
+            color: white;
+            padding: 4rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .success-message h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            nav {
+                gap: 1.5rem;
+            }
+            .search-bar input {
+                width: 150px;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 3%;
+            }
+            nav {
+                flex-direction: row;
+                gap: 1rem;
+                order: 3;
+                width: 100%;
+            }
+            nav a {
+                flex: 1;
+                text-align: center;
+                padding: 0.5rem 0;
+            }
+            .search-bar {
+                width: 100%;
+                order: 4;
+            }
+            .search-bar input {
+                width: 100%;
+            }
+            .account-actions {
+                flex-direction: row;
+                gap: 1rem;
+                order: 2;
+            }
+            .page-section {
+                padding: 1.5rem 3%;
+            }
+            .with-sidebar {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+                top: auto;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-image {
+                height: 250px;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            nav {
+                display: none;
+            }
+            .search-bar {
+                width: 100%;
+                margin: 0;
+            }
+            .hero {
+                min-height: auto;
+            }
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            table {
+                font-size: 0.85rem;
+            }
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">NEXO</div>
+    <nav>
+        <a onclick="showSection('inicio')">Inicio</a>
+        <a onclick="showSection('categorias')">Catálogo</a>
+        <a onclick="showSection('contacto')">Contacto</a>
+    </nav>
+    <div class="search-bar">
+        <input type="text" placeholder="Buscar prendas...">
+        <button>🔍</button>
+    </div>
+    <div class="account-actions">
+        <span onclick="showSection('carrito')" title="Carrito de Compras">🛒</span>
+        <span onclick="showSection('mi-cuenta')" title="Mi Cuenta">👤</span>
+        <span onclick="showSection('login')" title="Ingresar">🔐</span>
+        <span onclick="showSection('admin')" title="Admin">⚙️</span>
+    </div>
+</header>
+
+<!-- SECCIÓN INICIO -->
+<main id="inicio" class="page-section active-section">
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Nexo Fashion</h1>
+            <p>Descubre la mejor colección de ropa premium con diseños exclusivos. Confort, estilo y calidad en cada prenda.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showSection('categorias')">Explorar Catálogo</button>
+                <button class="btn btn-accent">Ofertas Especiales</button>
+            </div>
+        </div>
+        <div class="hero-image">👕</div>
+    </section>
+
+    <h2>Nuestras Colecciones</h2>
+    <div class="grid" style="margin-bottom: 3rem;">
+        <div class="card card-product">
+            <div class="img-placeholder">👔</div>
+            <h4>Colección Formal</h4>
+            <p>Prendas elegantes para ocasiones especiales</p>
+            <button class="btn btn-outline" style="width: 100%;">Ver Colección</button>
+        </div>
+        <div class="card card-product">
+            <div class="img-placeholder">👕</div>
+            <h4>Casual Wear</h4>
+            <p>Cómoda ropa para el día a día</p>
+            <button class="btn btn-outline" style="width: 100%;">Ver Colección</button>
+        </div>
+        <div class="card card-product">
+            <div class="img-placeholder">🧥</div>
+            <h4>Outerwear</h4>
+            <p>Abrigos y chaquetas de temporada</p>
+            <button class="btn btn-outline" style="width: 100%;">Ver Colección</button>
+        </div>
+        <div class="card card-product">
+            <div class="img-placeholder">👖</div>
+            <h4>Denim Collection</h4>
+            <p>Jeans clásicos y modernos</p>
+            <button class="btn btn-outline" style="width: 100%;">Ver Colección</button>
+        </div>
+    </div>
+
+    <h2>Productos Destacados</h2>
+    <div class="grid">
+        <div class="card card-product">
+            <div class="img-placeholder">👕</div>
+            <h4>Camiseta Premium Azul</h4>
+            <p class="price">$34.99</p>
+            <p>100% algodón, disponible en múltiples tallas y colores.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.85rem;">Detalles</button>
+                <button class="btn btn-accent" style="flex: 1; font-size: 0.85rem;">🛒 Agregar</button>
+            </div>
+        </div>
+
+        <div class="card card-product">
+            <div class="img-placeholder">👔</div>
+            <h4>Blazer Elegante Negro</h4>
+            <p><span class="price-old">$89.99</span><span class="price">$59.99</span><span class="discount-badge">-33%</span></p>
+            <p>Perfecto para eventos formales y reuniones importantes.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.85rem;">Detalles</button>
+                <button class="btn btn-accent" style="flex: 1; font-size: 0.85rem;">🛒 Agregar</button>
+            </div>
+        </div>
+
+        <div class="card card-product">
+            <div class="img-placeholder">👖</div>
+            <h4>Jeans Slim Fit</h4>
+            <p class="price">$49.99</p>
+            <p>Denim premium con ajuste perfecto y durabilidad garantizada.</p>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-outline" style="flex: 1; font-size: 0.85rem;">Detalles</button>
+                <button class="btn btn-accent" style="flex: 1; font-size: 0.85rem;">🛒 Agregar</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- SECCIÓN CATEGORÍAS -->
+<main id="categorias" class="page-section">
+    <h2>Catálogo de Productos</h2>
+    <div class="with-sidebar">
+        <aside class="sidebar">
+            <h4>Filtros</h4>
+            <label>Rango de Precio</label>
+            <input type="range" min="0" max="500" style="margin-bottom: 1rem;">
+            <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1rem;">$0 - $500</p>
+
+            <h4 style="margin-top: 1.5rem;">Talla</h4>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> XS
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> S
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> M
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> L
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> XL
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> XXL
+            </label>
+
+            <h4 style="margin-top: 1.5rem;">Color</h4>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> Negro
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> Blanco
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> Azul
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                <input type="checkbox"> Rojo
+            </label>
+
+            <button class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Aplicar Filtros</button>
+            <button class="btn btn-ghost" style="width: 100%; margin-top: 0.5rem;">Limpiar</button>
+        </aside>
+
+        <section>
+            <h3>Todos los Productos (48 disponibles)</h3>
+            <div class="grid">
+                <div class="card card-product">
+                    <div class="img-placeholder">👕</div>
+                    <h4>Producto 1</h4>
+                    <p class="price">$29.99</p>
+                    <button class="btn btn-accent" style="width: 100%;">🛒 Agregar</button>
+                </div>
+                <div class="card card-product">
+                    <div class="img-placeholder">👔</div>
+                    <h4>Producto 2</h4>
+                    <p class="price">$54.99</p>
+                    <button class="btn btn-accent" style="width: 100%;">🛒 Agregar</button>
+                </div>
+                <div class="card card-product">
+                    <div class="img-placeholder">👖</div>
+                    <h4>Producto 3</h4>
+                    <p class="price">$44.99</p>
+                    <button class="btn btn-accent" style="width: 100%;">🛒 Agregar</button>
+                </div>
+                <div class="card card-product">
+                    <div class="img-placeholder">🧥</div>
+                    <h4>Producto 4</h4>
+                    <p class="price">$79.99</p>
+                    <button class="btn btn-accent" style="width: 100%;">🛒 Agregar</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- SECCIÓN DETALLE DE PRODUCTO -->
+<main id="detalle-producto" class="page-section">
+    <div class="with-sidebar" style="grid-template-columns: 1fr 320px;">
+        <div class="card card-product">
+            <div class="img-placeholder" style="height: 400px; margin-bottom: 2rem;">👕</div>
+            <h2>Camiseta Premium Azul Marino</h2>
+            <div style="margin: 1.5rem 0;">
+                <span style="color: var(--accent); font-size: 1.2rem;">⭐⭐⭐⭐⭐</span>
+                <span style="color: var(--text-light); margin-left: 0.75rem; font-weight: 600;">(346 opiniones)</span>
+            </div>
+            <p class="price" style="font-size: 2.2rem; margin: 1rem 0;">$34.99</p>
+            <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 1rem;">✓ En stock • 🚚 Envío gratis en pedidos mayores a $50 • ✅ Garantía 2 años</p>
+            
+            <h4 style="margin: 1.5rem 0 0.75rem 0;">Descripción</h4>
+            <p>Camiseta confeccionada con 100% algodón premium de alta calidad. Diseño moderno y versátil que combina perfectamente con cualquier outfit casual o formal. Material transpirable y cómodo para uso diario.</p>
+            
+            <h4 style="margin: 1.5rem 0 0.75rem 0;">Características</h4>
+            <ul style="margin-left: 1.5rem; color: var(--text); line-height: 2;">
+                <li>100% Algodón Premium</li>
+                <li>Corte ergonómico y cómodo</li>
+                <li>Disponible en 6 colores</li>
+                <li>Lavable a máquina</li>
+                <li>Garantía de 2 años</li>
+                <li>Sostenible y ecológico</li>
+            </ul>
+        </div>
+
+        <aside class="sidebar">
+            <h4>Opciones de Compra</h4>
+            <label>Color</label>
+            <select>
+                <option>Selecciona un color</option>
+                <option>Azul Marino</option>
+                <option>Blanco</option>
+                <option>Negro</option>
+                <option>Gris</option>
+            </select>
+
+            <label>Talla</label>
+            <select>
+                <option>Selecciona talla</option>
+                <option>XS</option>
+                <option>S</option>
+                <option>M</option>
+                <option>L</option>
+                <option>XL</option>
+                <option>XXL</option>
+            </select>
+
+            <label>Cantidad</label>
+            <input type="number" value="1" min="1">
+
+            <button class="btn btn-accent" style="width: 100%; margin-top: 1.5rem; padding: 1rem;">🛒 Agregar al Carrito</button>
+            <button class="btn btn-ghost" style="width: 100%; margin-top: 0.5rem; padding: 1rem;">❤️ Guardar</button>
+
+            <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+            <h4>Detalles de Envío</h4>
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">Ingresa tu código postal para ver opciones de envío disponibles.</p>
+            <input type="text" placeholder="Código postal" style="margin-bottom: 1rem;">
+            <button class="btn btn-ghost" style="width: 100%;">Calcular Envío</button>
+        </aside>
+    </div>
+</main>
+
+<!-- SECCIÓN CONTACTO -->
+<main id="contacto" class="page-section">
+    <h2>Contáctanos</h2>
+    <div class="with-sidebar">
+        <section class="card card-product">
+            <h3>Envíanos un Mensaje</h3>
+            <form>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="text" placeholder="Nombre" required>
+                    <input type="text" placeholder="Apellido" required>
+                </div>
+                <input type="email" placeholder="Correo Electrónico" required>
+                <label>Asunto</label>
+                <select>
+                    <option>Selecciona un asunto</option>
+                    <option>Consulta sobre producto</option>
+                    <option>Problema con pedido</option>
+                    <option>Cambios/Devoluciones</option>
+                    <option>Sugerencia</option>
+                    <option>Otro</option>
+                </select>
+                <label>Mensaje</label>
+                <textarea placeholder="Escribe tu mensaje aquí..." style="height: 150px;"></textarea>
+                <button type="button" class="btn btn-accent" style="width: 100%; margin-top: 1rem;">📧 Enviar Mensaje</button>
+            </form>
+        </section>
+
+        <aside class="sidebar">
+            <h4>📞 Contacto</h4>
+            <p style="margin-bottom: 1.5rem;"><strong>Teléfono:</strong><br><a href="tel:+56212345678" style="color: var(--accent); text-decoration: none;">+56 2 1234-5678</a></p>
+            <p style="margin-bottom: 1.5rem;"><strong>Email:</strong><br><a href="mailto:info@nexo.cl" style="color: var(--accent); text-decoration: none;">info@nexo.cl</a></p>
+            <p style="margin-bottom: 1.5rem;"><strong>Dirección:</strong><br>Calle Principal 123<br>Santiago, Región Metropolitana<br>Chile</p>
+            <p style="margin-bottom: 1.5rem;"><strong>Horario:</strong><br>Lun-Vie: 9:00-18:00<br>Sábado: 10:00-15:00<br>Domingo: Cerrado</p>
+
+            <h4 style="margin-top: 2rem;">Síguenos</h4>
+            <div style="display: flex; gap: 1rem; font-size: 2rem;">
+                <span style="cursor: pointer; transition: all 0.3s; padding: 0.5rem;">📘</span>
+                <span style="cursor: pointer; transition: all 0.3s; padding: 0.5rem;">🐦</span>
+                <span style="cursor: pointer; transition: all 0.3s; padding: 0.5rem;">📷</span>
+                <span style="cursor: pointer; transition: all 0.3s; padding: 0.5rem;">▶️</span>
+            </div>
+        </aside>
+    </div>
+</main>
+
+<!-- SECCIÓN CARRITO -->
+<main id="carrito" class="page-section">
+    <h1>🛒 Carrito de Compras</h1>
+    <div class="with-sidebar">
+        <div style="flex: 1;">
+            <div class="card card-product">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Camiseta Azul M</strong></td>
+                            <td class="price">$34.99</td>
+                            <td><input type="number" value="1" min="1" style="width: 70px; padding: 0.5rem;"></td>
+                            <td class="price">$34.99</td>
+                            <td><button class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.85rem;">❌</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blazer Negro L</strong></td>
+                            <td class="price">$59.99</td>
+                            <td><input type="number" value="1" min="1" style="width: 70px; padding: 0.5rem;"></td>
+                            <td class="price">$59.99</td>
+                            <td><button class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.85rem;">❌</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <h4>Resumen del Pedido</h4>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);">
+                <span>Subtotal:</span>
+                <span class="price">$94.98</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);">
+                <span>Impuestos (19%):</span>
+                <span class="price">$18.05</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
+                <span>Envío:</span>
+                <span class="price" style="color: var(--success);">Gratis</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <strong style="font-size: 1.1rem;">Total:</strong>
+                <span style="font-size: 2rem; color: var(--accent); font-weight: 800;">$113.03</span>
+            </div>
+            <button class="btn btn-accent" style="width: 100%; margin-bottom: 0.75rem; padding: 1rem; font-size: 1rem;" onclick="showSection('confirmacion')">🔒 Proceder al Pago</button>
+            <button class="btn btn-outline" style="width: 100%; padding: 0.8rem;" onclick="showSection('categorias')">Seguir Comprando</button>
+        </aside>
+    </div>
+</main>
+
+<!-- SECCIÓN MI CUENTA -->
+<main id="mi-cuenta" class="page-section">
+    <h1>👤 Mi Cuenta</h1>
+    <div class="with-sidebar">
+        <aside class="sidebar-nav sidebar">
+            <div style="background: rgba(231, 76, 60, 0.1); color: var(--accent); border-left-color: var(--accent);">ℹ️ Información Personal</div>
+            <div>📦 Mis Pedidos</div>
+            <div>📍 Direcciones</div>
+            <div>🔑 Contraseña</div>
+            <div>❤️ Favoritos</div>
+            <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">🚪 Cerrar Sesión</div>
+        </aside>
+
+        <section class="card card-product">
+            <h3>Información Personal</h3>
+            <form>
+                <label>Nombre Completo</label>
+                <input type="text" value="Juan Pérez" required>
+
+                <label>Correo Electrónico</label>
+                <input type="email" value="juan.perez@example.com" required>
+
+                <label>Teléfono</label>
+                <input type="text" value="+56 9 XXXX-XXXX">
+
+                <label>Fecha de Nacimiento</label>
+                <input type="date" value="1995-03-15">
+
+                <label>Género</label>
+                <select>
+                    <option>Selecciona</option>
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                </select>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
+                    <button type="button" class="btn btn-accent">💾 Guardar</button>
+                    <button type="button" class="btn btn-outline">🔄 Cancelar</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</main>
+
+<!-- SECCIÓN LOGIN -->
+<main id="login" class="page-section">
+    <div style="max-width: 420px; margin: 3rem auto;">
+        <div class="card card-product">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary);">Ingresar a Nexo</h2>
+            <form>
+                <label>Correo Electrónico</label>
+                <input type="email" placeholder="tu@correo.com" required>
+
+                <label>Contraseña</label>
+                <input type="password" placeholder="Tu contraseña" required>
+
+                <label style="display: flex; align-items: center; font-weight: normal; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" style="width: auto;">
+                    Recuerda mi contraseña
+                </label>
+
+                <button type="button" class="btn btn-accent" style="width: 100%; margin-top: 1.5rem; padding: 1rem; font-size: 1rem;">🔐 Ingresar</button>
+
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <p style="color: var(--text-light); font-size: 0.9rem;">¿No tienes cuenta? <a href="#" style="color: var(--accent); text-decoration: none; font-weight: 700;">Regístrate aquí</a></p>
+                    <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;"><a href="#" style="color: var(--text-light); text-decoration: none;">¿Olvidaste tu contraseña?</a></p>
+                </div>
+
+                <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+                <button type="button" class="btn btn-ghost" style="width: 100%; margin-bottom: 0.75rem;">📱 Ingresar con Google</button>
+                <button type="button" class="btn btn-ghost" style="width: 100%;">📘 Ingresar con Facebook</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+<!-- SECCIÓN ADMIN DASHBOARD -->
+<main id="admin" class="page-section">
+    <h1>📊 Panel Administrativo - Nexo</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h4>💰 Ventas Totales</h4>
+            <h3>$28,450</h3>
+            <small>↑ 15% vs. mes anterior</small>
+        </div>
+        <div class="stat-card">
+            <h4>📦 Pedidos Pendientes</h4>
+            <h3>23</h3>
+            <small>Requieren procesamiento</small>
+        </div>
+        <div class="stat-card">
+            <h4>👥 Nuevos Clientes</h4>
+            <h3>89</h3>
+            <small>↑ 22% vs. mes anterior</small>
+        </div>
+        <div class="stat-card">
+            <h4>⚠️ Stock Bajo</h4>
+            <h3>12 productos</h3>
+            <small>Reabastecimiento urgente</small>
+        </div>
+    </div>
+
+    <div class="card card-product" style="margin-bottom: 2rem;">
+        <h3>📋 Últimos Pedidos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID PEDIDO</th>
+                    <th>CLIENTE</th>
+                    <th>FECHA</th>
+                    <th>TOTAL</th>
+                    <th>ESTADO</th>
+                    <th>ACCIÓN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#N001245</strong></td>
+                    <td>Juan Pérez</td>
+                    <td>2024-06-05</td>
+                    <td class="price">$113.03</td>
+                    <td><span class="badge badge-warning">Pendiente</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver</button></td>
+                </tr>
+                <tr>
+                    <td><strong>#N001244</strong></td>
+                    <td>Ana García</td>
+                    <td>2024-06-04</td>
+                    <td class="price">$185.50</td>
+                    <td><span class="badge badge-success">Completado</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver</button></td>
+                </tr>
+                <tr>
+                    <td><strong>#N001243</strong></td>
+                    <td>Carlos López</td>
+                    <td>2024-06-03</td>
+                    <td class="price">$75.75</td>
+                    <td><span class="badge badge-success">Completado</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver</button></td>
+                </tr>
+                <tr>
+                    <td><strong>#N001242</strong></td>
+                    <td>María Silva</td>
+                    <td>2024-06-02</td>
+                    <td class="price">$256.99</td>
+                    <td><span class="badge badge-danger">Cancelado</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver</button></td>
+                </tr>
+                <tr>
+                    <td><strong>#N001241</strong></td>
+                    <td>Roberto Díaz</td>
+                    <td>2024-06-01</td>
+                    <td class="price">$132.45</td>
+                    <td><span class="badge badge-success">Completado</span></td>
+                    <td><button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ver</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card card-product">
+        <h3>📊 Productos con Más Ventas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Categoría</th>
+                    <th>Unidades Vendidas</th>
+                    <th>Ingresos</th>
+                    <th>Stock Actual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Camiseta Azul Premium</strong></td>
+                    <td>Casual</td>
+                    <td>156</td>
+                    <td class="price">$5,459.44</td>
+                    <td><span class="badge badge-success">145 u.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Blazer Negro Elegante</strong></td>
+                    <td>Formal</td>
+                    <td>98</td>
+                    <td class="price">$5,879.02</td>
+                    <td><span class="badge badge-warning">32 u.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Jeans Slim Fit</strong></td>
+                    <td>Denim</td>
+                    <td>203</td>
+                    <td class="price">$10,146.97</td>
+                    <td><span class="badge badge-success">89 u.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Chaqueta Invierno</strong></td>
+                    <td>Outerwear</td>
+                    <td>54</td>
+                    <td class="price">$4,319.46</td>
+                    <td><span class="badge badge-danger">8 u.</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<!-- SECCIÓN CONFIRMACIÓN -->
+<main id="confirmacion" class="page-section">
+    <div class="success-message">
+        <h1>✅ ¡Compra Confirmada!</h1>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;">Tu pedido ha sido procesado exitosamente</p>
+        <p style="font-size: 1.4rem; margin-bottom: 2rem; font-weight: 800; letter-spacing: 1px;">NÚMERO DE PEDIDO: #N001245</p>
+        <p style="font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.8;">
+            Hemos enviado una confirmación detallada a tu correo electrónico.<br>
+            Podrás hacer seguimiento de tu envío en tu cuenta de Nexo.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <button class="btn btn-primary" onclick="showSection('inicio')">🏠 Ir al Inicio</button>
+            <button class="btn btn-accent" onclick="showSection('categorias')">🛍️ Seguir Comprando</button>
+            <button class="btn btn-outline" style="border-color: var(--success); color: var(--success);">📧 Ver Confirmación</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.page-section');
+        sections.forEach(s => s.classList.remove('active-section'));
+        
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active-section');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    // Efectos interactivos adicionales
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animación en botones
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform === 'translateY(-2px)' ? 'translateY(-4px)' : 'translateY(-2px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animación en tarjetas
+        const cards = document.querySelectorAll('.card');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+    });
+</script>
+</body>
+</html>
